@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Brawl Stars Resource Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0;font-family:'Brawl',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;}
+        body{background-color:#1a1a2e;background-image:url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');background-size:cover;background-attachment:fixed;background-position:center;color:white;line-height:1.5;padding:15px;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+        .container{width:100%;max-width:420px;background-color:rgba(34,40,49,0.9);backdrop-filter:blur(5px);border-radius:16px;padding:20px 15px;box-shadow:0 8px 20px rgba(0,0,0,0.3);border:1px solid #3d5a80;margin:0 auto;}
+        .header{text-align:center;margin-bottom:15px;}
+        .logo{width:80px;height:90px;margin:0 auto 10px;}
+        .game-title{color:#ffd700;font-size:1.8rem;font-weight:700;margin-bottom:5px;}
+        .step-title{color:#ffd700;font-size:1rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+        .username-input{width:100%;padding:12px 15px;border-radius:8px;border:none;background:rgba(255,255,255,0.1);color:white;margin-bottom:15px;border:1px solid #3d5a80;}
+        .username-input:focus{outline:none;border-color:#ffd700;}
+        .device-options{display:flex;gap:10px;margin:10px 0 20px;}
+        .device-option{flex:1;background:#2d4059;border:2px solid #3d5a80;border-radius:8px;padding:12px;text-align:center;cursor:pointer;transition:all 0.3s ease;}
+        .device-option.selected{border-color:#ffd700;background:#4a6fa5;}
+        .device-option img{width:30px;height:30px;margin-bottom:5px;}
+        .resource-section{margin-bottom:15px;}
+        .section-title{color:#ffd700;font-size:1rem;margin-bottom:10px;text-align:center;}
+        .resource-grid{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+        .resource-option{background:#3d5a80;border:2px solid #4a6fa5;border-radius:8px;padding:12px;text-align:center;cursor:pointer;transition:all 0.2s ease;width:45%;}
+        .resource-option.selected{border-color:#ffd700;background:#4a6fa5;}
+        .icon-wrapper{width:50px;height:50px;margin:0 auto 5px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.1);border-radius:50%;}
+        .resource-icon{max-width:100%;max-height:100%;}
+        .resource-amount{font-size:1rem;font-weight:bold;margin:3px 0;}
+        .generate-btn{background:linear-gradient(135deg,#ffd700 0%,#ff8c00 100%);color:#1a1a2e;border:none;border-radius:50px;padding:14px 20px;font-size:1rem;font-weight:700;cursor:pointer;margin:15px auto 0;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;max-width:280px;transition:all 0.3s ease;}
+        .generate-btn:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(255,215,0,0.4);}
+        .generate-btn:disabled{opacity:0.7;cursor:not-allowed;}
+        @media (min-width:480px){
+            .container{padding:25px 20px;}
+            .game-title{font-size:2rem;}
+            .resource-option{width:auto;min-width:120px;}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://static.vecteezy.com/system/resources/previews/027/127/543/large_2x/brawl-stars-logo-brawl-stars-icon-transparent-free-png.png" alt="Brawl Stars Logo" class="logo">
+            <h1 class="game-title">Gems & Coins Generator</h1>
+        </div>
+        
+        <div class="username-section">
+            <div class="step-title"><i class="fas fa-user"></i> Enter Your ID/Username</div>
+            <input type="text" class="username-input" placeholder="Your Brawl Stars ID/USERNAME" id="username">
+        </div>
+        
+        <div class="device-selector">
+            <div class="step-title"><i class="fas fa-mobile-alt"></i> Select Device</div>
+            <div class="device-options">
+                <div class="device-option" onclick="selectDevice(this,'android')">
+                    <img src="https://www.svgrepo.com/show/145061/android-logo.svg" alt="Android">
+                    <span></span>
+                </div>
+                <div class="device-option" onclick="selectDevice(this,'')">
+                    <img src="https://cdn.freebiesupply.com/logos/large/2x/apple-black-logo-png-transparent.png" alt="iOS">
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="resource-section">
+            <h3 class="section-title">Select Gems and Coins</h3>
+            <div class="resource-grid">
+                <div class="resource-option" onclick="selectResource(this,'gems',100)">
+                    <div class="icon-wrapper">
+                        <img src="https://static.wikia.nocookie.net/brawlstars/images/a/aa/Gem.png/revision/latest?cb=20181219074149&path-prefix=fr" alt="Gems" class="resource-icon">
+                    </div>
+                    <div class="resource-amount">500</div>
+                </div>
+                <div class="resource-option" onclick="selectResource(this,'gems',1000)">
+                    <div class="icon-wrapper">
+                        <img src="https://static.wikia.nocookie.net/brawlstars/images/a/aa/Gem.png/revision/latest?cb=20181219074149&path-prefix=fr" alt="Gems" class="resource-icon">
+                    </div>
+                    <div class="resource-amount">1000</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="resource-section">
+            <h3 class="section-title"></h3>
+            <div class="resource-grid">
+                <div class="resource-option" onclick="selectResource(this,'coins',1000)">
+                    <div class="icon-wrapper">
+                        <img src="https://static.wikia.nocookie.net/brawlstarsconception/images/6/6d/Coin.png/revision/latest?cb=20170724135159" alt="Coins" class="resource-icon">
+                    </div>
+                    <div class="resource-amount">1000</div>
+                </div>
+                <div class="resource-option" onclick="selectResource(this,'coins',5000)">
+                    <div class="icon-wrapper">
+                        <img src="https://static.wikia.nocookie.net/brawlstarsconception/images/6/6d/Coin.png/revision/latest?cb=20170724135159" alt="Coins" class="resource-icon">
+                    </div>
+                    <div class="resource-amount">5000</div>
+                    <div                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        
+        <button class="generate-btn" onclick="startGeneration()">
+            <i class="fas fa-bolt"></i>
+            GENERATE NOW
+        </button>
+    </div>
+
+    <script>
+        let selectedDevice = null;
+        let selectedResources = {
+            gems: null,
+            coins: null
+        };
+
+        function selectDevice(element, device) {
+            document.querySelectorAll('.device-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            selectedDevice = device;
+        }
+
+        function selectResource(element, type, amount) {
+            // Remove selected class from all options of the same type
+            document.querySelectorAll('.resource-option').forEach(opt => {
+                if (opt.getAttribute('onclick').includes(type)) {
+                    opt.classList.remove('selected');
+                }
+            });
+            
+            // Add selected class to clicked element
+            element.classList.add('selected');
+            selectedResources[type] = amount;
+        }
+
+        function showFakeLoading(seconds, message) {
+            const btn = document.querySelector('.generate-btn');
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${message}`;
+            btn.disabled = true;
+            return new Promise(resolve => setTimeout(resolve, seconds * 1000));
+        }
+
+        async function startGeneration() {
+            try {
+                // 1. Validate username
+                const username = document.getElementById('username').value.trim();
+                if (!username) {
+                    throw new Error('Please enter your Brawl Stars username!');
+                }
+
+                // 2. Validate device selection
+                if (!selectedDevice) {
+                    throw new Error('Please select your device type!');
+                }
+
+                // 3. Validate resources selection
+                if (!selectedResources.gems && !selectedResources.coins) {
+                    throw new Error('Please select at least one resource to generate!');
+                }
+
+                // 4. Show initial verification
+                await showFakeLoading(2, "VERIFYING ACCOUNT...");
+
+                // 5. Fake CAPTCHA verification
+                const captchaNum = Math.floor(Math.random() * 9000) + 1000;
+               const userInput = prompt(`Anti-bot verification:\nEnter this code: ${captchaNum}`)
+                
+                if (!userInput || userInput != captchaNum) {
+                    throw new Error('CAPTCHA verification failed!');
+                }
+
+                // 6. Show final processing
+                await showFakeLoading(3, "GENERATING RESOURCES...");
+
+                // 7. Build summary message
+                let summary = `✔ ${username}\n`;
+                summary += `✔ ${selectedDevice.toUpperCase()} Device\n`;
+                if (selectedResources.gems) summary += `✔ ${selectedResources.gems} Gems\n`;
+                if (selectedResources.coins) summary += `✔ ${selectedResources.coins} Coins\n`;
+                summary += "\nRedirecting to secure payment...";
+
+                alert(summary);
+
+                // 8. Redirect to CPA
+                // window.location.href = "https://locked4.com/cl/i/e6v4xd"; // Uncomment and replace with your actual CPA link
+
+            } catch (error) {
+                alert(`❌ Error: ${error.message}`);
+            } finally {
+                const btn = document.querySelector('.generate-btn');
+                btn.innerHTML = '<i class="fas fa-bolt"></i> GENERATE NOW';
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
